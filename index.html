@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Imposter</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<div class="app">
+		<header class="app__header">
+			<h1>Imposter</h1>
+		</header>
+
+		<main id="screen-setup" class="screen screen--active">
+			<section class="card card--players">
+				<h2>Players</h2>
+				<form id="players-form" class="players-form">
+					<div class="players-input">
+						<input id="player-name" type="text" placeholder="Enter player name" autocomplete="off" />
+						<button type="button" id="add-player" class="btn">Add</button>
+					</div>
+					<p id="players-error" class="muted" style="display:none;"></p>
+					<ul id="players-list" class="players-list players-list--dnd" aria-live="polite"></ul>
+					<div class="start_btn_container">
+						<button type="button" id="start-game" class="btn btn--primary" disabled>Start Game</button>
+					</div>
+				</form>
+			</section>
+		</main>
+
+		<main id="screen-reveal" class="screen">
+			<section class="card">
+				<h2 id="reveal-title">Player Reveal</h2>
+				<div class="reveal">
+					<div id="secret" class="secret secret--concealed" role="button" tabindex="0" aria-live="polite">
+						<p class="secret__prompt" id="secret-prompt"></p>
+						<p class="secret__text" id="secret-text"></p>
+					</div>
+				</div>
+				<div class="actions">
+					<button id="btn-next-player" class="btn" disabled>Next Player</button>
+				</div>
+				<p class="muted" id="round-indicator"></p>
+			</section>
+		</main>
+
+		<main id="screen-discuss" class="screen">
+			<section class="card">
+				<h2>Discuss and Vote</h2>
+				<p class="muted">Everyone: discuss clues and vote who the Imposter is.</p>
+				<div class="actions">
+					<button id="btn-new-round" class="btn btn--primary">Next Round</button>
+					<button id="btn-reset" class="btn">End Game</button>
+				</div>
+			</section>
+		</main>
+
+		<footer class="app__footer">
+			<div class="actions actions--header">
+				<a class="btn btn--secondary" href="rules.html">Rules</a>
+			</div>
+			<p class="muted">Created by Lucas Chen, Kiana Mohammadi and Nathan Chen</p>
+		</footer>
+	</div>
+
+	<script src="script.js"></script>
+</body>
+</html>

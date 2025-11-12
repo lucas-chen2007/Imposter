@@ -1,0 +1,16 @@
+{
+	"name": "imposter-game",
+	"version": "1.0.0",
+	"private": true,
+	"description": "Looped In - local pass-and-play imposter game",
+	"scripts": {
+		"start": "serve -l 5173 .",
+		"preview": "serve -l 4173 .",
+		"build": "echo \"Static app - no build step\""
+	},
+	"devDependencies": {
+		"serve": "^14.2.1"
+	}
+}
+
+

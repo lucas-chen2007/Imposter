@@ -1,0 +1,24 @@
+[
+	{
+		"topic": "Pizza",
+		"hints": ["It's round", "Often has cheese", "Comes in slices"]
+	},
+	{
+		"topic": "Beach",
+		"hints": ["Has sand", "Waves", "People relax here"]
+	},
+	{
+		"topic": "Library",
+		"hints": ["Quiet place", "Lots of books", "Many shelves"]
+	},
+	{
+		"topic": "Airplane",
+		"hints": ["It flies", "Wings", "Seats many"]
+	},
+	{
+		"topic": "Basketball",
+		"hints": ["Orange ball", "Hoop", "Dribbling helps"]
+	}
+]
+
+
