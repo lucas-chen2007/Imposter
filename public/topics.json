@@ -1,23 +1,59 @@
 [
 	{
-		"topic": "Pizza",
-		"hints": ["It's round", "Often has cheese", "Comes in slices"]
+		"topic": "Lucas",
+		"hints": []
 	},
 	{
-		"topic": "Beach",
-		"hints": ["Has sand", "Waves", "People relax here"]
+		"topic": "Eric",
+		"hints": []
 	},
 	{
-		"topic": "Library",
-		"hints": ["Quiet place", "Lots of books", "Many shelves"]
+		"topic": "Ethan",
+		"hints": []
 	},
 	{
-		"topic": "Airplane",
-		"hints": ["It flies", "Wings", "Seats many"]
+		"topic": "Tanisha",
+		"hints": []
 	},
 	{
-		"topic": "Basketball",
-		"hints": ["Orange ball", "Hoop", "Dribbling helps"]
+		"topic": "Alexandra",
+		"hints": []
+	},
+	{
+		"topic": "Nathan",
+		"hints": []
+	},
+	{
+		"topic": "Connor",
+		"hints": []
+	},
+	{
+		"topic": "Jack",
+		"hints": []
+	},
+	{
+		"topic": "Zach",
+		"hints": []
+	},
+	{
+		"topic": "Keegan",
+		"hints": []
+	},
+	{
+		"topic": "Sully",
+		"hints": []
+	},
+	{
+		"topic": "Obrian",
+		"hints": []
+	},
+	{
+		"topic": "Gabe",
+		"hints": []
+	},
+	{
+		"topic": "Kiana",
+		"hints": []
 	}
 ]
 
