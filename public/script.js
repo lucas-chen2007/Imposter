@@ -115,7 +115,11 @@ document.addEventListener("DOMContentLoaded", () => {
 	function loadPlayersFromStorage() {
 		try {
 			const stored = localStorage.getItem(STORAGE_KEY_PLAYERS);
-			if (!stored) return;
+			if (!stored) {
+				// Fresh window: no players saved yet, start blank
+				gameState.players = [];
+				return;
+			}
 			const parsed = JSON.parse(stored);
 			if (Array.isArray(parsed)) {
 				gameState.players = parsed
@@ -124,6 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			}
 		} catch (err) {
 			console.warn("Unable to load saved players:", err);
+			gameState.players = [];
 		}
 	}
 
