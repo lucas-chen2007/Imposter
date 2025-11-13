@@ -178,6 +178,9 @@ document.addEventListener("DOMContentLoaded", () => {
 			gameState.playerIndex += 1;
 			updateRevealForCurrentPlayer();
 		} else {
+			const discussStartEl = document.getElementById("discuss-start");
+			const starter = pickRandom(gameState.players);
+			discussStartEl.textContent =  `Action starts with ${starter}!`
 			setScreen("discuss");
 		}
 	}
