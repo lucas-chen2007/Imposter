@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	function persistPlayers() {
 		try {
-			localStorage.setItem(STORAGE_KEY_PLAYERS, JSON.stringify(gameState.players));
+			sessionStorage.setItem(STORAGE_KEY_PLAYERS, JSON.stringify(gameState.players));
 		} catch (err) {
 			console.warn("Unable to save players:", err);
 		}
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	function loadPlayersFromStorage() {
 		try {
-			const stored = localStorage.getItem(STORAGE_KEY_PLAYERS);
+			const stored = sessionStorage.getItem(STORAGE_KEY_PLAYERS);
 			if (!stored) {
 				// Fresh window: no players saved yet, start blank
 				gameState.players = [];
