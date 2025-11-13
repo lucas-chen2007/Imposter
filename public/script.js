@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-	// -------------------- ELEMENTS --------------------
 	const elements = {
 		screens: {
 			setup: document.getElementById("screen-setup"),
@@ -14,16 +13,13 @@ document.addEventListener("DOMContentLoaded", () => {
 		startGameBtn: document.getElementById("start-game"),
 		revealTitle: document.getElementById("reveal-title"),
 		secretBox: document.getElementById("secret"),
-		secretRole: document.getElementById("secret-role"),
 		secretText: document.getElementById("secret-text"),
 		secretPrompt: document.getElementById("secret-prompt"),
 		nextPlayerBtn: document.getElementById("btn-next-player"),
-		roundIndicator: document.getElementById("round-indicator"),
 		newRoundBtn: document.getElementById("btn-new-round"),
 		resetBtn: document.getElementById("btn-reset")
 	};
 
-	// -------------------- GAME STATE --------------------
 	const STORAGE_KEY_PLAYERS = "loopedInPlayers";
 	const gameState = {
 		players: [],
@@ -75,114 +71,56 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	function addPlayerFromInput() {
 		const name = (elements.playerNameInput.value || "").trim();
-		if (!name) {
-			showPlayersError("Please enter a name.");
-			return;
-		}
-
-		playerName = name.charAt(0).toUpperCase() + name.slice(1);
-
-		if (gameState.players.some(p => p.toLowerCase() === name.toLowerCase())) {
-			showPlayersError("Player names must be unique.");
-			return;
-		}
-		
-		clearPlayersError();
+		if (!name) return;
+		const playerName = name.charAt(0).toUpperCase() + name.slice(1);
+		if (gameState.players.some(p => p.toLowerCase() === name.toLowerCase())) return;
 		gameState.players.push(playerName);
 		elements.playerNameInput.value = "";
-		elements.playerNameInput.focus();
 		persistPlayers();
 		renderPlayers();
 		updateStartButton();
 	}
 
-	function showPlayersError(msg) {
-		elements.playersError.textContent = msg;
-		elements.playersError.classList.remove("muted");
-		elements.playersError.classList.add("error");
-		elements.playersError.style.display = "block";
-	}
-
-	function clearPlayersError() {
-		elements.playersError.textContent = "";
-		elements.playersError.style.display = "none";
-	}
-
 	function persistPlayers() {
-		try {
-			sessionStorage.setItem(STORAGE_KEY_PLAYERS, JSON.stringify(gameState.players));
-		} catch (err) {
-			console.warn("Unable to save players:", err);
-		}
+		sessionStorage.setItem(STORAGE_KEY_PLAYERS, JSON.stringify(gameState.players));
 	}
 
 	function loadPlayersFromStorage() {
-		try {
-			const stored = sessionStorage.getItem(STORAGE_KEY_PLAYERS);
-			if (!stored) {
-				// Fresh window: no players saved yet, start blank
-				gameState.players = [];
-				return;
-			}
-			const parsed = JSON.parse(stored);
-			if (Array.isArray(parsed)) {
-				gameState.players = parsed
-					.map(name => (typeof name === "string" ? name.trim() : ""))
-					.filter(Boolean);
-			}
-		} catch (err) {
-			console.warn("Unable to load saved players:", err);
-			gameState.players = [];
+		const stored = sessionStorage.getItem(STORAGE_KEY_PLAYERS);
+		if (!stored) return;
+		const parsed = JSON.parse(stored);
+		if (Array.isArray(parsed)) {
+			gameState.players = parsed.filter(name => typeof name === "string");
 		}
 	}
 
 	function updateStartButton() {
-		const hasMinPlayers = gameState.players.length >= 3;
-		elements.startGameBtn.disabled = !hasMinPlayers;
-	}
-
-	function normalizeTopics(raw) {
-		if (!Array.isArray(raw)) return [];
-		return raw
-			.map(entry => {
-				if (!entry || typeof entry !== "object") return null;
-				const topic = typeof entry.topic === "string" && entry.topic.trim()
-					? entry.topic.trim()
-					: (typeof entry.name === "string" ? entry.name.trim() : "");
-				if (!topic) return null;
-				return { topic, hints: entry.hints || [] };
-			})
-			.filter(Boolean);
+		elements.startGameBtn.disabled = gameState.players.length < 3;
 	}
 
 	// -------------------- DRAG & DROP --------------------
 	function enableDragAndDrop() {
-        const listItems = elements.playersList.querySelectorAll("li");
-        listItems.forEach((li) => {
-            li.addEventListener("dragstart", (e) => {
-                e.dataTransfer.setData("text/plain", li.dataset.index);
-                li.classList.add("dragging");
-            });
-    
-            li.addEventListener("dragend", () => {
-                li.classList.remove("dragging");
-            });
-    
-            li.addEventListener("dragover", (e) => e.preventDefault());
-    
-            li.addEventListener("drop", (e) => {
-                e.preventDefault();
-                const fromIndex = parseInt(e.dataTransfer.getData("text/plain"));
-                const toIndex = parseInt(li.dataset.index);
-                if (fromIndex === toIndex) return;
-                const moved = gameState.players.splice(fromIndex, 1)[0];
-                gameState.players.splice(toIndex, 0, moved);
-                persistPlayers();
-                renderPlayers();
-                updateStartButton();
-            });
-        });
-    }
+		const listItems = elements.playersList.querySelectorAll("li");
+		listItems.forEach(li => {
+			li.addEventListener("dragstart", e => {
+				e.dataTransfer.setData("text/plain", li.dataset.index);
+				li.classList.add("dragging");
+			});
+			li.addEventListener("dragend", () => li.classList.remove("dragging"));
+			li.addEventListener("dragover", e => e.preventDefault());
+			li.addEventListener("drop", e => {
+				e.preventDefault();
+				const fromIndex = parseInt(e.dataTransfer.getData("text/plain"));
+				const toIndex = parseInt(li.dataset.index);
+				if (fromIndex === toIndex) return;
+				const moved = gameState.players.splice(fromIndex, 1)[0];
+				gameState.players.splice(toIndex, 0, moved);
+				persistPlayers();
+				renderPlayers();
+				updateStartButton();
+			});
+		});
+	}
 
 	// -------------------- GAME FLOW --------------------
 	function setScreen(name) {
@@ -190,32 +128,17 @@ document.addEventListener("DOMContentLoaded", () => {
 		elements.screens[name].classList.add("screen--active");
 	}
 
-	function pickRandom(array) {
-		return array[Math.floor(Math.random() * array.length)];
-	}
+	function pickRandom(array) { return array[Math.floor(Math.random() * array.length)]; }
 
 	function startRound() {
-		if (gameState.players.length < 3) {
-			alert("Add at least 3 players.");
-			return;
-		}
-		if (!gameState.topics.length) {
-			alert("Topics not loaded.");
-			return;
-		}
-
+		if (gameState.players.length < 3 || !gameState.topics.length) return;
 		gameState.currentRound += 1;
 		gameState.playerIndex = 0;
 		gameState.imposterIndex = Math.floor(Math.random() * gameState.players.length);
 		gameState.currentTopic = pickRandom(gameState.topics);
-
-		updateRevealScreenHeader();
+		elements.revealTitle.textContent = `Round ${gameState.currentRound}`;
 		updateRevealForCurrentPlayer();
 		setScreen("reveal");
-	}
-
-	function updateRevealScreenHeader() {
-		elements.revealTitle.textContent = `Round ${gameState.currentRound}`;
 	}
 
 	function updateRevealForCurrentPlayer() {
@@ -259,9 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	}
 
-	function nextRoundOrEnd() {
-		startRound();
-	}
+	function nextRoundOrEnd() { startRound(); }
 
 	function resetGame() {
 		gameState.currentRound = 0;
@@ -275,22 +196,15 @@ document.addEventListener("DOMContentLoaded", () => {
 		elements.playerNameInput.disabled = false;
 		elements.addPlayerBtn.disabled = false;
 		elements.playerNameInput.value = "";
-		clearPlayersError();
 		setScreen("setup");
 	}
 
 	// -------------------- EVENT LISTENERS --------------------
 	elements.addPlayerBtn.addEventListener("click", addPlayerFromInput);
-	elements.playerNameInput.addEventListener("keydown", (e) => {
-		if (e.key === "Enter") {
-			e.preventDefault();
-			addPlayerFromInput();
-		}
+	elements.playerNameInput.addEventListener("keydown", e => {
+		if (e.key === "Enter") { e.preventDefault(); addPlayerFromInput(); }
 	});
-	elements.playersForm.addEventListener("submit", (e) => {
-		e.preventDefault();
-		addPlayerFromInput();
-	});
+	elements.playersForm.addEventListener("submit", e => { e.preventDefault(); addPlayerFromInput(); });
 
 	elements.startGameBtn.addEventListener("click", startRound);
 	elements.nextPlayerBtn.addEventListener("click", nextPlayerOrDiscuss);
@@ -298,47 +212,31 @@ document.addEventListener("DOMContentLoaded", () => {
 	elements.resetBtn.addEventListener("click", resetGame);
 
 	// -------------------- HOLD TO SHOW SECRET --------------------
-	elements.secretBox.addEventListener("mousedown", (e) => { e.preventDefault(); showSecret(); });
-	elements.secretBox.addEventListener("mouseup", (e) => { e.preventDefault(); hideSecret(); });
-	elements.secretBox.addEventListener("mouseleave", (e) => { hideSecret(); });
-	elements.secretBox.addEventListener("touchstart", (e) => { e.preventDefault(); showSecret(); });
-	elements.secretBox.addEventListener("touchend", (e) => { e.preventDefault(); hideSecret(); });
+	elements.secretBox.addEventListener("mousedown", e => { e.preventDefault(); showSecret(); });
+	elements.secretBox.addEventListener("mouseup", e => { e.preventDefault(); hideSecret(); });
+	elements.secretBox.addEventListener("mouseleave", hideSecret);
+	elements.secretBox.addEventListener("touchstart", e => { e.preventDefault(); showSecret(); });
+	elements.secretBox.addEventListener("touchend", e => { e.preventDefault(); hideSecret(); });
 
 	// -------------------- INITIALIZE --------------------
 	loadPlayersFromStorage();
 	renderPlayers();
 	updateStartButton();
 	setScreen("setup");
-	console.log("Imposter app loaded");
 
-	// Load topics from topics.json when hosted over HTTP(S)
+	// Load topics.json
 	(async () => {
 		try {
 			const res = await fetch("topics.json", { cache: "no-store" });
-			if (!res.ok) {
-				console.warn("Failed to fetch topics.json:", res.status, res.statusText);
-				updateStartButton();
-				return;
-			}
+			if (!res.ok) return;
 			const data = await res.json();
-			if (!Array.isArray(data)) {
-				console.warn("topics.json is not an array. Got:", data);
-				updateStartButton();
-				return;
-			}
-			const normalized = normalizeTopics(data);
-			if (!normalized.length) {
-				console.warn("topics.json contains no valid topics.");
-				updateStartButton();
-				return;
-			}
-			gameState.topics = normalized;
+			if (!Array.isArray(data)) return;
+			gameState.topics = data.filter(t => t && t.topic).map(t => ({
+				topic: t.topic,
+				hints: t.hints || []
+			}));
 			gameState.topicsLoaded = true;
-			console.log(`Loaded ${normalized.length} topics`);
 			updateStartButton();
-		} catch (err) {
-			console.warn("Error loading topics.json:", err);
-			updateStartButton();
-		}
+		} catch (err) { console.warn("Failed to load topics.json", err); }
 	})();
 });

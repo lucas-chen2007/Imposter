@@ -13,6 +13,7 @@
 			<h1>Imposter</h1>
 		</header>
 
+		<!-- Setup screen -->
 		<main id="screen-setup" class="screen screen--active">
 			<section class="card card--players">
 				<h2>Players</h2>
@@ -30,31 +31,33 @@
 			</section>
 		</main>
 
+		<!-- Reveal screen -->
 		<main id="screen-reveal" class="screen">
-			<section class="card">
-				<h2 id="reveal-title">Player Reveal</h2>
-				<div class="reveal">
-					<div id="secret" class="secret secret--concealed" role="button" tabindex="0" aria-live="polite">
-						<p class="secret__prompt" id="secret-prompt"></p>
-						<p class="secret__text" id="secret-text"></p>
-					</div>
+			<h2 id="reveal-title">Player Reveal</h2>
+			<div class="reveal">
+				<div id="secret" class="secret secret--concealed" role="button" tabindex="0" aria-live="polite">
+					<p class="secret__prompt" id="secret-prompt"></p>
+					<p class="secret__text" id="secret-text"></p>
 				</div>
-				<div class="actions">
-					<button id="btn-next-player" class="btn" disabled>Next Player</button>
-				</div>
-				<p class="muted" id="round-indicator"></p>
-			</section>
+			</div>
+			<div class="actions actions--center">
+				<button id="btn-next-player" class="btn btn--primary" disabled>Next Player</button>
+			</div>
 		</main>
 
+		<!-- Discuss screen -->
 		<main id="screen-discuss" class="screen">
+			<!-- Exit button top-right -->
+
 			<section class="card">
 				<h2>Discuss and Vote</h2>
 				<p class="muted">Everyone: discuss clues and vote who the Imposter is.</p>
-				<div class="actions">
+				<div class="start_btn_container">
 					<button id="btn-new-round" class="btn btn--primary">Next Round</button>
-					<button id="btn-reset" class="btn">End Game</button>
 				</div>
 			</section>
+			<button id="btn-reset" class="x x--top-right" title="Exit Game">✖</button>
+
 		</main>
 
 		<footer class="app__footer">
