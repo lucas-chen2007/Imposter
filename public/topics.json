@@ -54,7 +54,191 @@
 	{
 		"topic": "Kiana",
 		"hints": []
-	}
+	},
+	{
+		"topic": "Kiana",
+		"hints": []
+	},
+	{
+		"topic": "Nicole",
+		"hints": []
+	},
+	{
+		"topic": "Ravinderdeep",
+		"hints": []
+	},
+	{
+		"topic": "Waterloo",
+		"hints": []
+	},
+	{
+		"topic": "Laurier",
+		"hints": []
+	},
+	{
+		"topic": "Toronto Trip",
+		"hints": []
+	},
+	{
+		"topic": "Guelph Hoco",
+		"hints": []
+	},
+	{
+		"topic": "Jews",
+		"hints": []
+	},
+	{
+		"topic": "Beer",
+		"hints": []
+	},
+	{
+		"topic": "Prohibition",
+		"hints": []
+	},
+	{
+		"topic": "Kentucky",
+		"hints": []
+	},
+	{
+		"topic": "Gladiator Burgers & Steak",
+		"hints": []
+	},
+	{
+		"topic": "Biceps",
+		"hints": []
+	},
+	{
+		"topic": "Rec Eng",
+		"hints": []
+	},
+	{
+		"topic": "Little House",
+		"hints": []
+	},
+	{
+		"topic": "O-Week",
+		"hints": []
+	},
+	{
+		"topic": "Osmows",
+		"hints": []
+	},
+	{
+		"topic": "Aepi",
+		"hints": []
+	},
+	{
+		"topic": "Pikes",
+		"hints": []
+	},
+	{
+		"topic": "REV",
+		"hints": []
+	},
+	{
+		"topic": "V1",
+		"hints": []
+	},
+	{
+		"topic": "CMH",
+		"hints": []
+	},
+	{
+		"topic": "Kings Cup",
+		"hints": []
+	},
+	{
+		"topic": "Paranoia",
+		"hints": []
+	},
+	{
+		"topic": "Ride the Bus",
+		"hints": []
+	},
+	
+	{ "topic": "Taylor Swift", "hints": ["13", "blank", "snake"] },
+	{ "topic": "Drake", "hints": ["six", "ovo", "chart"] },
+	{ "topic": "Marvel", "hints": ["snaps", "mcu", "stones"] },
+	{ "topic": "Harry Potter", "hints": ["snitch", "quidditch", "gryffindor"] },
+	{ "topic": "TikTok", "hints": ["renegade", "duet", "foru"] },
+	{ "topic": "Starbucks", "hints": ["pumpkin", "frapp", "sirens"] },
+	{ "topic": "Sushi", "hints": ["nori", "umami", "maki"] },
+	{ "topic": "Stranger Things", "hints": ["eggos", "upside", "mindflayer"] },
+	{ "topic": "Among Us", "hints": ["sus", "vent", "cafeteria"] },
+	{ "topic": "BTS", "hints": ["bangtan", "army", "idol"] },
+	{ "topic": "Friends", "hints": ["pivot", "smelly", "lobster"] },
+	{ "topic": "Avengers", "hints": ["snap", "shield", "stark"] },
+	{ "topic": "Coca-Cola", "hints": ["polar", "fizz", "classic"] },
+	{ "topic": "Nike", "hints": ["swoosh", "just", "air"] },
+	{ "topic": "Harry Styles", "hints": ["watermelon", "fine", "one"] },
+	{ "topic": "McDonald’s", "hints": ["golden", "ronald", "fries"] },
+	{ "topic": "Fortnite", "hints": ["battle", "emote", "vbucks"] },
+	{ "topic": "Instagram", "hints": ["story", "filter", "likes"] },
+	{ "topic": "Red Bull", "hints": ["wings", "energy", "formula"] },
+	{ "topic": "Netflix", "hints": ["binge", "chill", "original"] },
+	{ "topic": "Kanye West", "hints": ["yeezy", "donda", "runaway"] },
+	{ "topic": "Pepsi", "hints": ["cola", "blue", "buzz"] },
+	{ "topic": "Avocado Toast", "hints": ["pit", "smashed", "brunch"] },
+	{ "topic": "Vans", "hints": ["checker", "old", "skate"] },
+	{ "topic": "Minecraft", "hints": ["block", "creeper", "redstone"] },
+	{ "topic": "The Office", "hints": ["beets", "dunder", "michael"] },
+	{ "topic": "Star Wars", "hints": ["lightsaber", "force", "vader"] },
+	{ "topic": "Adidas", "hints": ["three", "stripes", "boost"] },
+	{ "topic": "The Weeknd", "hints": ["blinding", "afterhours", "mask"] },
+	{ "topic": "Pokémon", "hints": ["pika", "gym", "evolve"] },
+	{ "topic": "AirPods", "hints": ["wireless", "buds", "case"] },
+	{ "topic": "YouTube", "hints": ["subscribe", "stream", "algorithm"] },
+	{ "topic": "Game of Thrones", "hints": ["iron", "throne", "winter"] },
+	{ "topic": "SpongeBob SquarePants", "hints": ["pineapple", "krabby", "square"] },
+	{ "topic": "Supreme", "hints": ["box", "red", "collab"] },
+	{ "topic": "Kendrick Lamar", "hints": ["DAMN", "section", "m.A.A.d"] },
+	{ "topic": "Vans Off The Wall", "hints": ["skate", "checker", "icon"] },
+	{ "topic": "PlayStation", "hints": ["dualshock", "sony", "console"] },
+	{ "topic": "Xbox", "hints": ["controller", "live", "xenon"] },
+	{ "topic": "Coca-Cola Zero", "hints": ["sugarless", "fizz", "zero"] },
+	{ "topic": "Peach Tea", "hints": ["sweet", "infused", "leaf"] },
+	{ "topic": "Avengers: Endgame", "hints": ["snap", "time", "gauntlet"] },
+	{ "topic": "Meme", "hints": ["viral", "format", "laugh"] },
+	{ "topic": "Snapchat", "hints": ["streaks", "bitmoji", "filter"] },
+	{ "topic": "Dr. Pepper", "hints": ["twenty", "twenty-three", "flavor"] },
+	{ "topic": "Peanut Butter", "hints": ["jar", "spread", "crunch"] },
+	{ "topic": "Cold Brew", "hints": ["iced", "coffee", "beans"] },
+	{ "topic": "The Mandalorian", "hints": ["child", "beskar", "mando"] },
+	{ "topic": "Rick and Morty", "hints": ["portal", "pickle", "wubba"] },
+	{ "topic": "Genshin Impact", "hints": ["element", "teyvat", "wish"] },
+	{ "topic": "Zelda", "hints": ["hyrule", "link", "master"] },
+	{ "topic": "Among Us Crewmate", "hints": ["tasks", "space", "vent"] },
+	{ "topic": "Chanel", "hints": ["coco", "no5", "logo"] },
+	{ "topic": "Gucci", "hints": ["belt", "double", "gg"] },
+	{ "topic": "Balenciaga", "hints": ["sneaker", "triple", "logo"] },
+	{ "topic": "Air Jordan 1", "hints": ["retro", "high", "swoosh"] },
+	{ "topic": "KFC", "hints": ["colonel", "bucket", "crispy"] },
+	{ "topic": "Subway", "hints": ["footlong", "sandwich", "fresh"] },
+	{ "topic": "Chipotle", "hints": ["bowl", "guac", "salsa"] },
+	{ "topic": "Popeyes", "hints": ["spicy", "crispy", "tenders"] },
+	{ "topic": "NBA", "hints": ["dunk", "dribble", "hoops"] },
+	{ "topic": "NFL", "hints": ["touchdown", "snap", "huddle"] },
+	{ "topic": "Soccer", "hints": ["goal", "kick", "pitch"] },
+	{ "topic": "Olympics", "hints": ["torch", "rings", "podium"] },
+	{ "topic": "Avocado", "hints": ["green", "pit", "toast"] },
+	{ "topic": "Cheeseburger", "hints": ["patty", "cheese", "bun"] },
+	{ "topic": "Pizza", "hints": ["slice", "cheese", "toppings"] },
+	{ "topic": "Soda", "hints": ["carbonated", "can", "fizz"] },
+	{ "topic": "Ice Cream", "hints": ["cone", "scoop", "sundae"] },
+	{ "topic": "Chocolate", "hints": ["cocoa", "sweet", "bar"] },
+	{ "topic": "Netflix Originals", "hints": ["binge", "series", "exclusive"] },
+	{ "topic": "Disney+", "hints": ["mouse", "stream", "original"] },
+	{ "topic": "HBO Max", "hints": ["game", "thrones", "max"] },
+	{ "topic": "Peaky Blinders", "hints": ["tommy", "gang", "birmingham"] },
+	{ "topic": "Stranger Things Season 4", "hints": ["upside", "eggo", "mind"] },
+	{ "topic": "Squid Game", "hints": ["marbles", "red", "guards"] },
+	{ "topic": "Bridgerton", "hints": ["ton", "duke", "regency"] },
+	{ "topic": "Euphoria", "hints": ["zaya", "makeup", "high"] },
+	{ "topic": "Billie Eilish", "hints": ["green", "happier", "ocean"] },
+	{ "topic": "Olivia Rodrigo", "hints": ["sour", "drivers", "guitar"] },
+	{ "topic": "Doja Cat", "hints": ["hot", "planet", "pink"] },
+	{ "topic": "K-Pop", "hints": ["idol", "fan", "dance"] },
+	{ "topic": "Jungkook", "hints": ["vocal", "army", "golden"] }	  
 ]
 
 
