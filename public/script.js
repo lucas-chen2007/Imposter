@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			return;
 		}
 
-		name = name.charAt(0).toUpperCase() + name.slice(1);
+		playerName = name.charAt(0).toUpperCase() + name.slice(1);
 
 		if (gameState.players.some(p => p.toLowerCase() === name.toLowerCase())) {
 			showPlayersError("Player names must be unique.");
@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 		
 		clearPlayersError();
-		gameState.players.push(name);
+		gameState.players.push(playerName);
 		elements.playerNameInput.value = "";
 		elements.playerNameInput.focus();
 		persistPlayers();
