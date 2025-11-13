@@ -227,8 +227,10 @@ document.addEventListener("DOMContentLoaded", () => {
 		elements.secretBox.classList.remove("secret--concealed");
 		if (isImposter) {
 			elements.secretPrompt.textContent = "YOU ARE THE IMPOSTER";
-			const hint = pickRandom(gameState.currentTopic.hints);
-			elements.secretText.textContent = `Hint: ${hint}`;
+			if (gameState.currentTopic.hints != []){
+				const hint = pickRandom(gameState.currentTopic.hints);
+				elements.secretText.textContent = `Hint: ${hint}`;
+			}
 		} else {
 			elements.secretPrompt.textContent = gameState.currentTopic.topic;
 			elements.secretText.textContent = "";
