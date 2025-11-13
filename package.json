@@ -6,7 +6,7 @@
 	"scripts": {
 		"start": "serve -l 5173 .",
 		"preview": "serve -l 4173 .",
-		"build": "echo \"Static app - no build step\""
+		"build": "echo 'No build needed'"
 	},
 	"devDependencies": {
 		"serve": "^14.2.1"
