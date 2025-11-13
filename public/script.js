@@ -34,7 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		currentTopic: null,
 		topicsLoaded: false
 	};
-	let secretRevealed = false;
 
 	// -------------------- PLAYER MANAGEMENT --------------------
 	function renderPlayers() {
@@ -130,8 +129,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	function updateStartButton() {
 		const hasMinPlayers = gameState.players.length >= 3;
-		// Allow starting as soon as there are enough players.
-		// startRound() will still validate topics and show an alert if missing.
 		elements.startGameBtn.disabled = !hasMinPlayers;
 	}
 
@@ -143,17 +140,8 @@ document.addEventListener("DOMContentLoaded", () => {
 				const topic = typeof entry.topic === "string" && entry.topic.trim()
 					? entry.topic.trim()
 					: (typeof entry.name === "string" ? entry.name.trim() : "");
-				// let hints = [];
-				// if (Array.isArray(entry.hints)) hints = entry.hints;
-				// else if (Array.isArray(entry.clues)) hints = entry.clues;
-				// else if (typeof entry.hint === "string") hints = [entry.hint];
-				// hints = hints
-				// 	.map(h => (typeof h === "string" ? h.trim() : ""))
-				// 	.filter(Boolean);
-				// if (!topic || !hints.length) return null;
-                if (!topic) return null;
-                return { topic };
-				// return { topic, hints };
+				if (!topic) return null;
+				return { topic, hints: entry.hints || [] };
 			})
 			.filter(Boolean);
 	}
@@ -161,20 +149,17 @@ document.addEventListener("DOMContentLoaded", () => {
 	// -------------------- DRAG & DROP --------------------
 	function enableDragAndDrop() {
         const listItems = elements.playersList.querySelectorAll("li");
-    
         listItems.forEach((li) => {
             li.addEventListener("dragstart", (e) => {
                 e.dataTransfer.setData("text/plain", li.dataset.index);
                 li.classList.add("dragging");
             });
     
-            li.addEventListener("dragend", (e) => {
+            li.addEventListener("dragend", () => {
                 li.classList.remove("dragging");
             });
     
-            li.addEventListener("dragover", (e) => {
-                e.preventDefault(); // allow drop
-            });
+            li.addEventListener("dragover", (e) => e.preventDefault());
     
             li.addEventListener("drop", (e) => {
                 e.preventDefault();
@@ -222,19 +207,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	function updateRevealScreenHeader() {
 		elements.revealTitle.textContent = `Round ${gameState.currentRound}`;
-		// elements.roundIndicator.textContent = `Round ${gameState.currentRound}`;
 	}
 
 	function updateRevealForCurrentPlayer() {
 		const player = gameState.players[gameState.playerIndex];
 		elements.secretPrompt.textContent = player;
 		elements.secretText.textContent = "";
-		concealSecret(false);
+		elements.secretBox.classList.add("secret--concealed");
+		elements.nextPlayerBtn.disabled = false;
 	}
 
-	function revealSecret() {
+	function showSecret() {
 		const isImposter = gameState.playerIndex === gameState.imposterIndex;
-		secretRevealed = true;
 		elements.secretBox.classList.remove("secret--concealed");
 		if (isImposter) {
 			elements.secretPrompt.textContent = "YOU ARE THE IMPOSTER";
@@ -247,13 +231,12 @@ document.addEventListener("DOMContentLoaded", () => {
 		elements.nextPlayerBtn.disabled = true;
 	}
 
-	function concealSecret(allowAdvance = false) {
-		secretRevealed = false;
-		elements.secretBox.classList.add("secret--concealed");
+	function hideSecret() {
 		const player = gameState.players[gameState.playerIndex];
+		elements.secretBox.classList.add("secret--concealed");
 		elements.secretPrompt.textContent = player;
 		elements.secretText.textContent = "";
-		elements.nextPlayerBtn.disabled = !allowAdvance;
+		elements.nextPlayerBtn.disabled = false;
 	}
 
 	function nextPlayerOrDiscuss() {
@@ -282,7 +265,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		elements.addPlayerBtn.disabled = false;
 		elements.playerNameInput.value = "";
 		clearPlayersError();
-		concealSecret(false);
 		setScreen("setup");
 	}
 
@@ -300,24 +282,16 @@ document.addEventListener("DOMContentLoaded", () => {
 	});
 
 	elements.startGameBtn.addEventListener("click", startRound);
-	const toggleSecret = () => {
-		if (!gameState.currentTopic) return;
-		if (!secretRevealed) {
-			revealSecret();
-		} else {
-			concealSecret(true);
-		}
-	};
-	elements.secretBox.addEventListener("click", toggleSecret);
-	elements.secretBox.addEventListener("keydown", (e) => {
-		if (e.key === "Enter" || e.key === " ") {
-			e.preventDefault();
-			toggleSecret();
-		}
-	});
 	elements.nextPlayerBtn.addEventListener("click", nextPlayerOrDiscuss);
 	elements.newRoundBtn.addEventListener("click", nextRoundOrEnd);
 	elements.resetBtn.addEventListener("click", resetGame);
+
+	// -------------------- HOLD TO SHOW SECRET --------------------
+	elements.secretBox.addEventListener("mousedown", (e) => { e.preventDefault(); showSecret(); });
+	elements.secretBox.addEventListener("mouseup", (e) => { e.preventDefault(); hideSecret(); });
+	elements.secretBox.addEventListener("mouseleave", (e) => { hideSecret(); });
+	elements.secretBox.addEventListener("touchstart", (e) => { e.preventDefault(); showSecret(); });
+	elements.secretBox.addEventListener("touchend", (e) => { e.preventDefault(); hideSecret(); });
 
 	// -------------------- INITIALIZE --------------------
 	loadPlayersFromStorage();
@@ -326,7 +300,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	setScreen("setup");
 	console.log("Imposter app loaded");
 
- 	// Load topics from topics.json when hosted over HTTP(S)
+	// Load topics from topics.json when hosted over HTTP(S)
 	(async () => {
 		try {
 			const res = await fetch("topics.json", { cache: "no-store" });
@@ -341,7 +315,6 @@ document.addEventListener("DOMContentLoaded", () => {
 				updateStartButton();
 				return;
 			}
-			// Normalize and set
 			const normalized = normalizeTopics(data);
 			if (!normalized.length) {
 				console.warn("topics.json contains no valid topics.");
